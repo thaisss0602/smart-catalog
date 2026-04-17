@@ -1,121 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { ProductGrid } from "./components/ProductGrid";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+const produtos = [
+  { id: 1, nome: "MacBook Air M3",     categoria: "notebook", preco: 9499,  icon: "laptop",         cor: "#00f2ff" },
+  { id: 2, nome: "Dell XPS 15",        categoria: "notebook", preco: 12499, icon: "laptop-minimal", cor: "#00ff9d" },
+  { id: 3, nome: "iPhone 15 Pro",      categoria: "celular",  preco: 7299,  icon: "smartphone",     cor: "#ff00e5" },
+  { id: 4, nome: "Pixel 9 Pro",        categoria: "celular",  preco: 6999,  icon: "smartphone",     cor: "#a855f7" },
+  { id: 5, nome: "AirPods Max",        categoria: "audio",    preco: 5990,  icon: "headphones",     cor: "#7000ff" },
+  { id: 6, nome: "Sony WH-1000XM5",    categoria: "audio",    preco: 3299,  icon: "headphones",     cor: "#06b6d4" },
+  { id: 7, nome: "Apple Watch Ultra",  categoria: "wearable", preco: 6499,  icon: "watch",          cor: "#ff4d00" },
+  { id: 8, nome: "Garmin Fenix 7",     categoria: "wearable", preco: 5499,  icon: "watch",          cor: "#10b981" }
+];
+
+export default function App() {
+  // Troque para "celular", "audio" ou "wearable" para ver outras categorias.
+  const categoriaAtiva = "audio";
+
+  // 1. Filtragem: Selecionamos apenas os itens desejados
+  const filtrados = produtos.filter(p => p.categoria === categoriaAtiva);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="container">
+      <header className="header">
+        <span className="badge">New Collection 2026</span>
+        <h1 className="title">Smart<span>Catalog</span></h1>
+        <p className="subtitle">
+          Exibindo categoria: <strong>{categoriaAtiva}</strong> ({filtrados.length} itens)
+        </p>
+      </header>
 
-      <div className="ticks"></div>
+      {/* 2. Renderização: Enviamos a sublista para o Grid */}
+      <ProductGrid items={filtrados} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <footer className="footer">
+        <p>Material Didático | Prof. Rafael Liberato</p>
+      </footer>
+    </div>
+  );
 }
 
-export default App
